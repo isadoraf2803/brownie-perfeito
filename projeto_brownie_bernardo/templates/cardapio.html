@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Digital - Confeitaria do Bernardo</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .produto { border-bottom: 1px solid #eee; padding: 15px 0; display: flex; justify-content: space-between; align-items: center; }
+        .produto:last-child { border-bottom: none; }
+        .info h3 { margin: 0 0 5px 0; color: #2c1810; }
+        .info p { margin: 0; color: #666; font-size: 14px; }
+        .preco { font-weight: bold; color: #b85d18; font-size: 16px; display: block; margin-top: 5px; }
+        .btn-pedir { background-color: #25D366; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; text-decoration: none; font-size: 14px; }
+        .btn-pedir:hover { background-color: #1ebe5d; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Topo com a logo ao lado do título -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 10px;">
+            <img src="{{ url_for('static', filename='img/brownie_01.png') }}" alt="Logo" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover;">
+            <h1 style="margin: 0; color: #4a2e18; font-size: 28px;">Brownies do Bernardo</h1>
+        </div>
+        
+        <p style="text-align: center; color: #666; margin-bottom: 25px;">Escolha seu sabor favorito e peça pelo WhatsApp!</p>
+        
+        <div class="lista-produtos">
+            {% for produto in produtos %}
+            <div class="produto">
+                <div class="info">
+                    <h3>{{ produto.nome }}</h3>
+                    <p>{{ produto.descricao }}</p>
+                    <span class="preco">R$ {{ "%.2f"|format(produto.preco) }}</span>
+                </div>
+                <a href="https://wa.me/5500000000000?text=Olá!%20Gostaria%20de%20pedir%20um%20{{ produto.nome }}" target="_blank" class="btn-pedir">Pedir</a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Rodapé com o Instagram (agora posicionado corretamente no final) -->
+        <div style="text-align: center; margin-top: 30px; padding-top: 15px; border-top: 1px solid #eee;">
+            <a href="https://instagram.com/SEU_USUARIO" target="_blank" style="text-decoration: none; color: #555; font-size: 14px; display: inline-flex; align-items: center; gap: 8px;">
+                <i class="fab fa-instagram" style="font-size: 18px; color: #E1306C;"></i>
+                @SEU_USUARIO
+            </a>
+        </div>
+    </div>
+</body>
+</html>
